@@ -1,3 +1,13 @@
+/** Queue.java stores all of the moves and gives them back as requested
+  *
+  * @author			Justin Schafer
+  * @id				jdschafer
+  * @course			Programming 2 CSIS 252
+  * @assignment		Lab 3 Simon
+  * @related		Simon.java
+  * @included		
+  */
+
 public class Queue {
     protected int head;
     protected int tail;
@@ -17,9 +27,9 @@ public class Queue {
     public void enQueue(Object item) {
     	if(queue.length == elements)
     		grow();
-    	tail = tail++ % queue.length;
+    	tail = tail + 1 % queue.length;
     	queue[tail] = item;
-    	elements = elements++;
+    	elements = elements + 1;
     }
     
     public Object deQueue() {
@@ -27,13 +37,17 @@ public class Queue {
     	    return null;
         Object copy = queue[head];
     	queue[head] = null;
-    	head = head++ % queue.length;
-    	elements = elements--;
+    	head = head + 1 % queue.length;
+    	elements = elements - 1;
     	return copy;
     }
     
     public Object peek() {
     	return queue[head];
+    }
+    
+    public Object peek(int loc) {
+    	return queue[loc];
     }
     
     public void grow() {
@@ -46,7 +60,7 @@ public class Queue {
     	
     	queue = grown;
     	head = 0;
-    	tail = elements--;
+    	tail = elements - 1;
     }
     
     public boolean isEmpty() {
